@@ -1,18 +1,22 @@
 package com.example.coroutinesdemo3_viewmodelscope
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class MainActivityViewModel : ViewModel() {
-//    val myJob = Job()
+    //    val myJob = Job()
 //    val myScope = CoroutineScope(Dispatchers.IO + myJob)
-
+    private var userRepository = UserRepository()
+    var users :MutableLiveData<List<User>> = MutableLiveData()
     fun getUserData() {
         viewModelScope.launch {
+            var result:List<User>? = null
+            withContext(Dispatchers.IO){
+                result = userRepository.getUsers()
+            }
+            users.value = result
 
         }
 
