@@ -7,16 +7,16 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
 class MainActivity : AppCompatActivity() {
-    lateinit var viewmodel:MainActivityViewModel
+    lateinit var viewmodel: MainActivityViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         viewmodel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
-        viewmodel.getUserData()
+//        viewmodel.getUserData()
         viewmodel.users.observe(this, Observer {
             it.forEach {
-                Log.i("MyTag","name is ${it.name}")
+                Log.i("MyTag", "name is ${it.name}")
             }
         })
 
